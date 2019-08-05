@@ -3,14 +3,10 @@ package me.syus.ticketservice.domain;
 import javax.persistence.*;
 import java.math.BigDecimal;
 
-import static javax.persistence.GenerationType.SEQUENCE;
-
 @Entity
 @Table(name = "seats")
 public class Seat {
     @Id
-//    @GeneratedValue(strategy = SEQUENCE, generator="seats_id_seq")
-//    @SequenceGenerator(name="seats_id_seq", sequenceName="seats_id_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 

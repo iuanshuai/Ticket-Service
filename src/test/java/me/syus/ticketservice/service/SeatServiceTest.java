@@ -34,7 +34,7 @@ public class SeatServiceTest {
         expectedResult.setPrice(new BigDecimal("29.99"));
         expectedResult.setAvailability(true);
         seatService.save(expectedResult);
-        logger.debug("the seat id is: " + expectedResult.getId());
+        logger.info("the seat id is: " + expectedResult.getId());
         Iterable<Seat> actualResult = seatService.findAll();
         assertNotNull(actualResult);
 

@@ -1,19 +1,12 @@
 package me.syus.ticketservice.domain;
-
-
 import javax.persistence.*;
-
 import java.util.List;
-
-import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity
 @Table(name = "users")
 public class User {
-
     @Id
-    @GeneratedValue(strategy = SEQUENCE, generator = "users_id_seq1")
-    @SequenceGenerator(name = "users_id_seq1", sequenceName = "users_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @Column
