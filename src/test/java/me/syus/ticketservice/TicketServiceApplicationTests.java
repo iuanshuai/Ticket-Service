@@ -20,8 +20,7 @@ public class TicketServiceApplicationTests {
 
 	@Test
 	public void contextLoads() {
-		logger.debug("test logging");
-
+		logger.info("test logging");
 	}
 
 }

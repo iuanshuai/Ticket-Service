@@ -37,8 +37,8 @@ public abstract class CRUDRepositoryImpl<T, ID> implements CRUDRepository<T, ID>
 
     @Override
     public T findById(ID id) {
-
         String hql = "FROM "+hQLEntityClazz.getName() +" t where t.id = :id";
+        System.out.println("hql="+hql);
         TypedQuery<T> query = sessionFactory.getCurrentSession().createQuery(hql).setParameter("id",id);
         return query.getSingleResult();
     }
