@@ -22,7 +22,7 @@ public class PersistenceConfig {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Bean(name="hibernate4AnnotatedSessionFactory")
-    @Profile({"unit"})
+    @Profile({"unit","dev"})
     public LocalSessionFactoryBean getLocalSessionFactoryBeanUnit(@Autowired DataSource dataSource){
         LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
         sessionFactoryBean.setDataSource(dataSource);
