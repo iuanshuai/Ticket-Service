@@ -45,7 +45,7 @@ public class SeatServiceTest {
     @Transactional
     public void findByIdTest() {
         Seat expectedResult = new Seat();
-        expectedResult.setPrice(new BigDecimal("19.99"));
+        expectedResult.setPrice(new BigDecimal("39.99"));
         expectedResult.setAvailability(true);
         seatService.save(expectedResult);
         Seat actualResult = seatService.findById(expectedResult.getId());
@@ -61,7 +61,7 @@ public class SeatServiceTest {
         expectedResult.setAvailability(true);
         seatService.save(expectedResult);
         logger.debug("the seat id is: " + expectedResult.getId());
-        List<Seat> actualResult = seatService.findAvailable();
+        List<Seat> actualResult = seatService.findAllAvailableSeat();
         System.out.println(actualResult);
         assertNotNull(actualResult);
     }

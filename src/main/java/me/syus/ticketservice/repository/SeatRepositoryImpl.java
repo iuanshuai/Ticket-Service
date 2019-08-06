@@ -18,12 +18,13 @@ public class SeatRepositoryImpl extends CRUDRepositoryImpl<Seat, Long> implement
     private SessionFactory sessionFactory;
 
     @Override
-    public List<Seat> findAvailable() {
-        String hql = "FROM Seat s where s.availability = true";
+    public List<Seat> findAllAvailableSeats() {
+        String hql = "FROM Seat s where s.isAvailable = true";
         Session s = sessionFactory.getCurrentSession();
         TypedQuery<Seat> query = s.createQuery(hql);
         return query.getResultList();
     }
+
 
 
     @Override

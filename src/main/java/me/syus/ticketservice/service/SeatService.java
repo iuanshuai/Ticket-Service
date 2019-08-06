@@ -28,9 +28,14 @@ public class SeatService {
         return seat;
     }
 
-    public List<Seat> findAvailable() {
-        List<Seat> seats = seatRepository.findAvailable();
+    public List<Seat> findAllAvailableSeat() {
+        List<Seat> seats = seatRepository.findAllAvailableSeats();
         return seats;
+    }
+
+    public boolean checkAvailableById(Long id) {
+        Seat seat = seatRepository.findById(id);
+        return seat.isAvailable();
     }
 
 }

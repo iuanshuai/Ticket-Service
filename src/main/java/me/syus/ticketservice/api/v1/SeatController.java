@@ -5,9 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,10 +26,20 @@ public class SeatController {
         return seatService.findAll();
     }
 
+    // /api/v1/seats/available GET
+    @RequestMapping(value = "/available", method = RequestMethod.GET)
+    public List findAllAvailableSeats() {
+        logger.info("list available seats");
+        return seatService.findAllAvailableSeat();
+    }
+
+    // /api/v1/seats/availability?id=xx GET
+    @RequestMapping(value = "/availability", method = RequestMethod.GET, params = "id")
+    public Boolean checkAvailableById(@RequestParam("id") Long id) {
+        logger.info("check available by id: " + id);
+        return seatService.checkAvailableById(id);
+    }
 
 
-//    @GetMapping(path="/all")
-//    public @ResponseBody List<Seat> getAllSeats() {
-//        return seatService.findAll();
-//    }
+
 }

@@ -34,9 +34,4 @@ public class UserServiceTest {
         Iterable<User> actualResult = userService.findAll();
         assertNotNull(actualResult);
     }
-
-
-
-
-
 }
