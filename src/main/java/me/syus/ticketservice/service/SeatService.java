@@ -4,6 +4,8 @@ import me.syus.ticketservice.domain.Seat;
 import me.syus.ticketservice.repository.SeatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -16,16 +18,21 @@ public class SeatService {
         return seatRepository.save(seat);
     }
 
-    public Iterable<Seat> findAll() {
+    public List<Seat> findAll() {
 
-        Iterable<Seat> seats = seatRepository.findAll();
+        List<Seat> seats = seatRepository.findAll();
         return seats;
 
     }
 
-    public Optional<Seat> findById(Long id) {
-        Optional<Seat> seat = seatRepository.findById(id);
+    public Seat findById(Long id) {
+        Seat seat = seatRepository.findById(id);
         return seat;
+    }
+
+    public List<Seat> findAvailable() {
+        List<Seat> seats = seatRepository.findAvailable();
+        return seats;
     }
 
 }

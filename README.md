@@ -7,7 +7,7 @@
 
 This is an implementation of a simple ticket service that facilitates the discovery, temporary hold, and final reservation of seats within a high-demand performance venue.
 
-It was made using **Spring Boot**, **Spring Data JPA**, **Spring RESTful web services**, **Maven**, **PostgreSQL**,and **Docker**.
+It was made using **Spring Boot**, **Spring Data JPA**, **Spring RESTful web services**, **Maven**, **PostgreSQL**, and **Docker**.
 
 ## Build & Installation
 

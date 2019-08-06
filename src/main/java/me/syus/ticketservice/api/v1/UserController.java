@@ -1,7 +1,5 @@
 package me.syus.ticketservice.api.v1;
 
-import me.syus.ticketservice.domain.User;
-import me.syus.ticketservice.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +14,12 @@ public class UserController {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    @Autowired
-    private UserService userService;
-
-    @GetMapping(path="/all")
-    public @ResponseBody Iterable<User> findAll() {
-        return userService.findAll();
-    }
+//    @Autowired
+//    private UserService userService;
+//
+//    @GetMapping(path="/all")
+//    public @ResponseBody Iterable<User> findAll() {
+//        return userService.findAll();
+//    }
 
 }

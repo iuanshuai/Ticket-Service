@@ -1,6 +1,5 @@
 package me.syus.ticketservice.service;
 
-
 import me.syus.ticketservice.domain.Seat;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,11 +10,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
-import java.util.Optional;
+import java.util.List;
 
-import static junit.framework.TestCase.*;
+import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertNotNull;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
@@ -27,26 +28,41 @@ public class SeatServiceTest {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
-
     @Test
+    @Transactional
     public void findAllTest() {
         Seat expectedResult = new Seat();
         expectedResult.setPrice(new BigDecimal("29.99"));
         expectedResult.setAvailability(true);
         seatService.save(expectedResult);
-        logger.info("the seat id is: " + expectedResult.getId());
-        Iterable<Seat> actualResult = seatService.findAll();
+        logger.debug("the seat id is: " + expectedResult.getId());
+        List<Seat> actualResult = seatService.findAll();
         assertNotNull(actualResult);
 
     }
 
     @Test
+    @Transactional
     public void findByIdTest() {
         Seat expectedResult = new Seat();
         expectedResult.setPrice(new BigDecimal("19.99"));
         expectedResult.setAvailability(true);
         seatService.save(expectedResult);
-        Optional<Seat> actualResult = seatService.findById(expectedResult.getId());
-        assertEquals(expectedResult.getId(), actualResult.get().getId());
+        Seat actualResult = seatService.findById(expectedResult.getId());
+        assertEquals(expectedResult.getId(), actualResult.getId());
+    }
+
+
+    @Test
+    @Transactional
+    public void findAvailableSeatsTest() {
+        Seat expectedResult = new Seat();
+        expectedResult.setPrice(new BigDecimal("29.99"));
+        expectedResult.setAvailability(true);
+        seatService.save(expectedResult);
+        logger.debug("the seat id is: " + expectedResult.getId());
+        List<Seat> actualResult = seatService.findAvailable();
+        System.out.println(actualResult);
+        assertNotNull(actualResult);
     }
 }
