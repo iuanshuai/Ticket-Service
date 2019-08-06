@@ -1,0 +1,7 @@
+ALTER TABLE seats
+ADD COLUMN user_id BIGINT DEFAULT NULL;
+
+ALTER TABLE seats
+ADD CONSTRAINT fk_seat_user
+FOREIGN KEY (user_id) REFERENCES users (id);
+
