@@ -5,7 +5,7 @@ services:
   - docker
 before_script:
   - docker pull postgres
-  - docker run --name dealerDB -e POSTGRES_DB=ticketservice_unit -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=password -p 5430:5432 -d postgres
+  - docker run --name dealerDB -e POSTGRES_DB=ticketservice -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=password -p 5430:5432 -d postgres
   - mvn clean compile flyway:migrate -P unit -Ddb_username=admin -Ddb_password=password
 
 script:
