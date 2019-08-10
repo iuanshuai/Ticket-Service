@@ -10,6 +10,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
+import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -25,13 +26,30 @@ public class UserServiceTest {
     @Transactional
     public void findAllTest() {
         User expectedResult = new User();
-        expectedResult.setEmail("test@gmail.com");
+        expectedResult.setEmail("test11@gmail.com");
         expectedResult.setFirstName("Appleseed");
         expectedResult.setLastName("John");
-        expectedResult.setUsername("johnappleseed");
+        expectedResult.setUsername("testjohnappleseed");
         expectedResult.setPassword("123123");
         userService.save(expectedResult);
         Iterable<User> actualResult = userService.findAll();
         assertNotNull(actualResult);
+    }
+
+    @Test
+    @Transactional
+    public void findByEmailTest() {
+        User expectedResult = new User();
+        expectedResult.setEmail("test11@gmail.com");
+        expectedResult.setFirstName("Appleseed");
+        expectedResult.setLastName("John");
+        expectedResult.setUsername("testjohnappleseed");
+        expectedResult.setPassword("123123");
+        userService.save(expectedResult);
+        User actualResult = userService.findByEmail(expectedResult.getEmail());
+        assertEquals(expectedResult, actualResult);
+
+
+
     }
 }

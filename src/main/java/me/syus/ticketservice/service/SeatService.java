@@ -4,6 +4,8 @@ import me.syus.ticketservice.domain.Seat;
 import me.syus.ticketservice.repository.SeatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -11,6 +13,9 @@ public class SeatService {
 
     @Autowired
     private SeatRepository seatRepository;
+
+    @Autowired
+    private UserService userService;
 
     public Seat save(Seat seat) {
         return seatRepository.save(seat);
@@ -33,9 +38,24 @@ public class SeatService {
         return seats;
     }
 
-    public boolean checkAvailableById(Long id) {
-        Seat seat = seatRepository.findById(id);
-        return seat.isAvailable();
+    public List<Seat> findAndHoldSeat(int numSeats, String email) {
+        List<Seat> holdSeatList = new ArrayList<>();
+        List<Seat> seatList = seatRepository.findAllAvailableSeats();
+        if (seatList.size() < numSeats) return null; // TODO Exception Handle
+        for (int i = 0; i < numSeats; i++) {
+            Seat seat = seatList.get(i);
+            seat.setAvailability(2);
+            seat.setUser(userService.findByEmail(email));
+            save(seat);
+            holdSeatList.add(seat);
+        }
+        return holdSeatList;
     }
+
+    public int checkAvailableById(Long id) {
+        Seat seat = seatRepository.findById(id);
+        return seat.getAvailability();
+    }
+
 
 }

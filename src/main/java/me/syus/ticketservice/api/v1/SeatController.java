@@ -35,7 +35,7 @@ public class SeatController {
 
     // /api/v1/seats/availability?id=xx GET
     @RequestMapping(value = "/availability", method = RequestMethod.GET, params = "id")
-    public Boolean checkAvailableById(@RequestParam("id") Long id) {
+    public int checkAvailableById(@RequestParam("id") Long id) {
         logger.info("check available by id: " + id);
         return seatService.checkAvailableById(id);
     }

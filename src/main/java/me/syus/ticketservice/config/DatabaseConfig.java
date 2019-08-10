@@ -16,7 +16,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-public class PersistenceConfig {
+public class DatabaseConfig {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 

@@ -17,7 +17,7 @@ public class Seat {
     private BigDecimal price;
 
     @Column(name = "availability")
-    private boolean isAvailable;
+    private int availability; // 0 = available, 1 = hold, 2 = booked
 
     @ManyToOne
     @JoinColumn(name="user_id")
@@ -39,11 +39,15 @@ public class Seat {
         this.price = price;
     }
 
-    public boolean isAvailable() {
-        return isAvailable;
+    public int getAvailability() {
+        return availability;
     }
 
-    public void setAvailability(boolean isAvailable) {
-        this.isAvailable = isAvailable;
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setAvailability(int availability) {
+        this.availability = availability;
     }
 }

@@ -40,6 +40,13 @@ public class UserRepositoryImpl extends CRUDRepositoryImpl<User, Long> implement
         return query.getSingleResult();
     }
 
+    @Override
+    public User findByEmail(String email) {
+        String hql = "FROM User u where u.email = :email";
+        TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery(hql).setParameter("email", email);
+        return query.getSingleResult();
+    }
+
     @Autowired
     @Override
     public void setHQLEntityClazz() {

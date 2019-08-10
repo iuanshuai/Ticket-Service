@@ -1,6 +1,7 @@
 package me.syus.ticketservice.service;
 
 import me.syus.ticketservice.domain.Seat;
+import me.syus.ticketservice.domain.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -26,6 +27,9 @@ public class SeatServiceTest {
     @Autowired
     private SeatService seatService;
 
+    @Autowired
+    private UserService userService;
+
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Test
@@ -33,7 +37,7 @@ public class SeatServiceTest {
     public void findAllTest() {
         Seat expectedResult = new Seat();
         expectedResult.setPrice(new BigDecimal("29.99"));
-        expectedResult.setAvailability(true);
+        expectedResult.setAvailability(2);
         seatService.save(expectedResult);
         logger.debug("the seat id is: " + expectedResult.getId());
         List<Seat> actualResult = seatService.findAll();
@@ -46,7 +50,7 @@ public class SeatServiceTest {
     public void findByIdTest() {
         Seat expectedResult = new Seat();
         expectedResult.setPrice(new BigDecimal("39.99"));
-        expectedResult.setAvailability(true);
+        expectedResult.setAvailability(0);
         seatService.save(expectedResult);
         Seat actualResult = seatService.findById(expectedResult.getId());
         assertEquals(expectedResult.getId(), actualResult.getId());
@@ -56,13 +60,37 @@ public class SeatServiceTest {
     @Test
     @Transactional
     public void findAvailableSeatsTest() {
+        // TODO Revise
         Seat expectedResult = new Seat();
         expectedResult.setPrice(new BigDecimal("29.99"));
-        expectedResult.setAvailability(true);
+        expectedResult.setAvailability(0);
         seatService.save(expectedResult);
         logger.debug("the seat id is: " + expectedResult.getId());
         List<Seat> actualResult = seatService.findAllAvailableSeat();
         System.out.println(actualResult);
         assertNotNull(actualResult);
     }
+
+//    @Test
+//    @Transactional
+//    public void findAndHoldSeatTest() {
+//        Seat testSeat = new Seat();
+//        testSeat.setPrice(new BigDecimal("29.99"));
+//        testSeat.setAvailability(0);
+//        seatService.save(testSeat);
+//        User testUser = new User();
+//        testUser.setEmail("test11@gmail.com");
+//        testUser.setFirstName("Appleseed");
+//        testUser.setLastName("John");
+//        testUser.setUsername("testjohnappleseed");
+//        testUser.setPassword("123123");
+//        userService.save(testUser);
+//        seatService.findAndHoldSeat(1, "test11@gmail.com");
+//
+//
+//    }
+
+
+
+
 }
