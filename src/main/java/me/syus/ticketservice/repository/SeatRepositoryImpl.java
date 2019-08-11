@@ -41,6 +41,13 @@ public class SeatRepositoryImpl extends CRUDRepositoryImpl<Seat, Long> implement
     }
 
     @Override
+    public Seat update(Seat seat) {
+        Session session = sessionFactory.getCurrentSession();
+        session.update(seat);
+        return seat;
+    }
+
+    @Override
     public List<Seat> findAll() {
         String hql = "FROM Seat";
         Session s = sessionFactory.getCurrentSession();

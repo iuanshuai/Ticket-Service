@@ -21,6 +21,10 @@ public class SeatService {
         return seatRepository.save(seat);
     }
 
+    public Seat update(Seat seat) {
+        return seatRepository.update(seat);
+    }
+
     public List<Seat> findAll() {
 
         List<Seat> seats = seatRepository.findAll();
@@ -46,13 +50,14 @@ public class SeatService {
             Seat seat = seatList.get(i);
             seat.setAvailability(2);
             seat.setUser(userService.findByEmail(email));
-            save(seat);
+            update(seat);
             holdSeatList.add(seat);
         }
         return holdSeatList;
     }
 
     public String reserveSeats(String email) {
+        // TODO
         List<Seat> reservedSeatList = new ArrayList<>();
         return null;
     }

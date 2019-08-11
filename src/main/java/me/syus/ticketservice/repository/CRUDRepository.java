@@ -6,5 +6,6 @@ public interface CRUDRepository<T, ID> {
     T save(T t);
     List<T> findAll();
     T findById(ID id);
+    T update(T t);
 
 }

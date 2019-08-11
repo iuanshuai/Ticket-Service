@@ -34,10 +34,16 @@ public class SeatController {
     }
 
     // /api/v1/seats/availability?id=xx GET
-    @RequestMapping(value = "/availability", method = RequestMethod.GET, params = "id")
+    @RequestMapping(value = "/availability", method = RequestMethod.GET)
     public int checkAvailableById(@RequestParam("id") Long id) {
         logger.info("check available by id: " + id);
         return seatService.checkAvailableById(id);
+    }
+
+    // /api/v1/seats/hold
+    @RequestMapping(value = "/hold", method = RequestMethod.GET)
+    public List findAndHoldSeat(@RequestParam("num") int num, @RequestParam("email") String email) {
+        return seatService.findAndHoldSeat(num, email);
     }
 
 

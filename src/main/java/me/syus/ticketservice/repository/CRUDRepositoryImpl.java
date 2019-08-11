@@ -28,6 +28,13 @@ public abstract class CRUDRepositoryImpl<T, ID> implements CRUDRepository<T, ID>
     }
 
     @Override
+    public T update(T t) {
+        Session session = sessionFactory.getCurrentSession();
+        session.update(t);
+        return t;
+    }
+
+    @Override
     public List<T> findAll() {
         String hql = "FROM " + hQLEntityClazz.getName();
         Session s = sessionFactory.getCurrentSession();
@@ -42,4 +49,5 @@ public abstract class CRUDRepositoryImpl<T, ID> implements CRUDRepository<T, ID>
         TypedQuery<T> query = sessionFactory.getCurrentSession().createQuery(hql).setParameter("id",id);
         return query.getSingleResult();
     }
+
 }
