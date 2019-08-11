@@ -14,6 +14,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
@@ -91,10 +92,27 @@ public class SeatServiceTest {
         int seatNumAfter = seatService.findAllAvailableSeat().size();
         assertEquals(seatNumAfter, seatNumBefore - 1);
 
-
     }
 
+    @Test
+    @Transactional
+    public void findByUserTest() {
+        User testUser = new User();
+        testUser.setEmail("test11@gmail.com");
+        testUser.setFirstName("Appleseed");
+        testUser.setLastName("John");
+        testUser.setUsername("testjohnappleseed");
+        testUser.setPassword("123123");
+        userService.save(testUser);
+        Seat testSeat = new Seat();
+        testSeat.setPrice(new BigDecimal("29.99"));
+        testSeat.setAvailability(2);
+        testSeat.setUser(testUser);
+        seatService.save(testSeat);
+        List<Seat> expectResult = new ArrayList<>();
+        expectResult.add(testSeat);
+        List<Seat> actualResult = seatService.findByUser(testUser.getId());
+        assertEquals(expectResult, actualResult);
 
-
-
+    }
 }

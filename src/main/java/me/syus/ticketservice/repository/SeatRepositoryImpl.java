@@ -55,6 +55,13 @@ public class SeatRepositoryImpl extends CRUDRepositoryImpl<Seat, Long> implement
         return query.getSingleResult();
     }
 
+    @Override
+    public List<Seat> findByUser(Long id) {
+        String hql = "FROM Seat seat where seat.user.id = :id";
+        TypedQuery<Seat> query = sessionFactory.getCurrentSession().createQuery(hql).setParameter("id", id);
+        return query.getResultList();
+    }
+
     @Autowired
     @Override
     public void setHQLEntityClazz() {

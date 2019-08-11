@@ -17,7 +17,7 @@ public class Seat {
     private BigDecimal price;
 
     @Column(name = "availability")
-    private int availability; // 0 = available, 1 = hold, 2 = booked
+    private int availability; // 0 = available, 1 = holden, 2 = booked
 
     @ManyToOne
     @JoinColumn(name="user_id")

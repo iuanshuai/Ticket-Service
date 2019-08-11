@@ -8,4 +8,5 @@ public interface SeatRepository extends CRUDRepository<Seat, Long> {
 
     List<Seat> findAllAvailableSeats();
 
+    List<Seat> findByUser(Long id);
 }

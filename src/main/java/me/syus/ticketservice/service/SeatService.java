@@ -52,10 +52,18 @@ public class SeatService {
         return holdSeatList;
     }
 
+    public String reserveSeats(String email) {
+        List<Seat> reservedSeatList = new ArrayList<>();
+        return null;
+    }
+
     public int checkAvailableById(Long id) {
         Seat seat = seatRepository.findById(id);
         return seat.getAvailability();
     }
 
+    public List<Seat> findByUser(Long id) {
+        return seatRepository.findByUser(id);
+    }
 
 }
