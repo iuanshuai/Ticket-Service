@@ -71,24 +71,28 @@ public class SeatServiceTest {
         assertNotNull(actualResult);
     }
 
-//    @Test
-//    @Transactional
-//    public void findAndHoldSeatTest() {
-//        Seat testSeat = new Seat();
-//        testSeat.setPrice(new BigDecimal("29.99"));
-//        testSeat.setAvailability(0);
-//        seatService.save(testSeat);
-//        User testUser = new User();
-//        testUser.setEmail("test11@gmail.com");
-//        testUser.setFirstName("Appleseed");
-//        testUser.setLastName("John");
-//        testUser.setUsername("testjohnappleseed");
-//        testUser.setPassword("123123");
-//        userService.save(testUser);
-//        seatService.findAndHoldSeat(1, "test11@gmail.com");
-//
-//
-//    }
+    @Test
+    @Transactional
+    public void findAndHoldSeatTest() {
+        Seat testSeat = new Seat();
+        testSeat.setPrice(new BigDecimal("29.99"));
+        testSeat.setAvailability(0);
+        seatService.save(testSeat);
+//        List<Seat> availableSeatBefore = seatService.findAllAvailableSeat();
+        int seatNumBefore = seatService.findAllAvailableSeat().size();
+        User testUser = new User();
+        testUser.setEmail("test11@gmail.com");
+        testUser.setFirstName("Appleseed");
+        testUser.setLastName("John");
+        testUser.setUsername("testjohnappleseed");
+        testUser.setPassword("123123");
+        userService.save(testUser);
+        seatService.findAndHoldSeat(1, "test11@gmail.com");
+        int seatNumAfter = seatService.findAllAvailableSeat().size();
+        assertEquals(seatNumAfter, seatNumBefore - 1);
+
+
+    }
 
 
 
