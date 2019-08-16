@@ -3,10 +3,13 @@ package me.syus.ticketservice.service;
 import me.syus.ticketservice.domain.Seat;
 import me.syus.ticketservice.repository.SeatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 @Service
 public class SeatService {
@@ -16,6 +19,7 @@ public class SeatService {
 
     @Autowired
     private UserService userService;
+
 
     public Seat save(Seat seat) {
         return seatRepository.save(seat);
@@ -46,15 +50,39 @@ public class SeatService {
         List<Seat> holdSeatList = new ArrayList<>();
         List<Seat> seatList = seatRepository.findAllAvailableSeats();
         if (seatList.size() < numSeats) return null; // TODO Exception Handle
+        //UUID uuid = UUID.randomUUID();
         for (int i = 0; i < numSeats; i++) {
             Seat seat = seatList.get(i);
-            seat.setAvailability(2);
+            seat.setAvailability(1);
             seat.setUser(userService.findByEmail(email));
             update(seat);
             holdSeatList.add(seat);
         }
+        TimerTask releaseTask = new TimerTask() {
+            @Override
+            public void run() {
+                releaseSeat(holdSeatList);
+            }
+        };
+        Timer timer = new Timer("Timer");
+        long delay = 30000L;
+        timer.schedule(releaseTask, delay);
         return holdSeatList;
     }
+
+    public void releaseSeat(List<Seat> seats) {
+        if (seats.get(0).getAvailability() != 2) {
+            for (int i = 0; i < seats.size(); i++) {
+                Seat seat = seats.get(i);
+                seat.setUser(null);
+                seat.setAvailability(0);
+                update(seat);
+            }
+        }
+    }
+
+
+
 
     public String reserveSeats(String email) {
         // TODO
