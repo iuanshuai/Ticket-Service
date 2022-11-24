@@ -17,7 +17,7 @@
 	<properties>
 		<java.version>1.8</java.version>
 		<org.slf4j-version>1.7.25</org.slf4j-version>
-		<hibernate.version>5.3.1.Final</hibernate.version>
+		<hibernate.version>5.3.20.Final</hibernate.version>
 
 	</properties>
 
